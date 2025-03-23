@@ -11,14 +11,14 @@ spec:
     chart: mongodb
     helm:
       valueFiles:
-        - https://raw.githubusercontent.com/REPO/refs/heads/main/values.yaml
+        - https://raw.githubusercontent.com/koden-process/formation-mongodb-k8s/refs/heads/main/values.yaml
       values: |
         auth:
           existingSecret: koden-formation-mongodb-secret
           usernames:
             - koden
           databases:
-            - lsdfj345235SFQSQDFAZE
+            - meow
   destination:
     server: https://kubernetes.default.svc
     namespace: koden
