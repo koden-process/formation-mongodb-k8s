@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: APP_NAME
+  name: koden-formation-mongodb
   namespace: argocd
 spec:
-  project: PROJECT_NAME
+  project: koden
   source:
     repoURL: https://charts.bitnami.com/bitnami
     targetRevision: 13.6.5
@@ -14,14 +14,14 @@ spec:
         - https://raw.githubusercontent.com/REPO/refs/heads/main/values.yaml
       values: |
         auth:
-          existingSecret: SECRET_NAME
+          existingSecret: koden-formation-mongodb-secret
           usernames:
-            - USER_NAME
+            - koden
           databases:
-            - DATABASE_NAME
+            - lsdfj345235SFQSQDFAZE
   destination:
     server: https://kubernetes.default.svc
-    namespace: NAMESPACE
+    namespace: koden
   syncPolicy:
     automated:
       prune: true
