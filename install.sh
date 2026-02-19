@@ -12,6 +12,6 @@ kubectl create secret generic "$SECRET_NAME" -n "$NAMESPACE" \
   --from-literal=mongodb-passwords="$DATABASE_USER_PASS" \
   --from-literal=mongodb-uri="mongodb://root:$DATABASE_ROOT_PASS@$APP_NAME.$NAMESPACE.svc.cluster.local:27017"
 
-kubectl apply -f app.yaml -n argocd
+kubectl apply -f argocd/app.yaml -n argocd
 
 echo "Déploiement terminé avec succès."
