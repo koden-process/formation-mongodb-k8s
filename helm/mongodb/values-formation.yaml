@@ -1,0 +1,44 @@
+# Values for formation MongoDB deployment
+image:
+  repository: mongo
+  pullPolicy: IfNotPresent
+  tag: "7.0"
+
+auth:
+  enabled: true
+  rootPassword: ""  # Will be provided by existing secret
+  database: "meow"  # Base de données par défaut à créer
+  existingSecret: "formation-mongodb-secret"
+
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: "csi-cinder-high-speed"
+  accessModes:
+    - ReadWriteOnce
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+
+# Configuration spécifique pour OVH pour éviter les problèmes de multi-attach
+podAnnotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+
+nodeSelector: {}
+
+affinity:
+  # Assurer que le pod reste sur le même nœud que le volume
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: In
+          values:
+          - mongodb
+      topologyKey: "kubernetes.io/hostname"

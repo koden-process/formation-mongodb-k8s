@@ -1,0 +1,7 @@
+apiVersion: v2
+name: mongodb
+description: A simple Helm chart for MongoDB using official image
+version: 0.1.0
+appVersion: "7.0"
+maintainers:
+  - name: Koden Process

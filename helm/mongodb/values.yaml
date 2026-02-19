@@ -1,0 +1,53 @@
+# Default values for mongodb
+replicaCount: 1
+
+image:
+  repository: mongo
+  pullPolicy: IfNotPresent
+  tag: "7.0"
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 27017
+
+auth:
+  enabled: true
+  rootPassword: ""
+  username: ""
+  password: ""
+  database: ""
+  existingSecret: ""
+
+persistence:
+  enabled: true
+  storageClass: "csi-cinder-high-speed"
+  size: 1Gi
+  accessModes:
+    - ReadWriteOnce
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# MongoDB configuration
+mongodb:
+  configuration: |
+    # MongoDB configuration file
+    storage:
+      dbPath: /data/db
+    net:
+      port: 27017
+      bindIp: 0.0.0.0
+    security:
+      authorization: enabled

@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: formation-mongodb
+  namespace: argocd
+spec:
+  project: koden-clients
+  source:
+    repoURL: https://github.com/koden-process/formation-mongodb-k8s.git
+    targetRevision: HEAD
+    path: helm/mongodb
+    helm:
+      valueFiles:
+        - values-formation.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: koden-clients
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
