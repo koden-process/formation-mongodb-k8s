@@ -8,7 +8,7 @@ auth:
   enabled: true
   rootPassword: ""  # Will be provided by existing secret
   database: "meow"  # Base de données par défaut à créer
-  existingSecret: "koden-formation-mongodb-secret"
+  existingSecret: "formation-mongodb-secret"
 
 persistence:
   enabled: true
